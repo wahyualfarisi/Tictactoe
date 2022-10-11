@@ -11,16 +11,30 @@ export default function Game() {
 
     useEffect(() => {
       const winner = calculateWinner(squares)
+      const isFillSquare = squares.every((item) => item !== null);
 
       if(winner){
         setScores((prevState) => ({
           ...prevState,
           [winner]: prevState[winner] + 1
         }))
-        setSquare(Array(9).fill(null))
-        setPlayerXisNext(true)
+        
+        restartState()
+      }else if(isFillSquare) {
+        setScores((prevState) => ({
+          ...prevState,
+          tie: prevState.tie + 1
+        }))
+        
+        restartState()
       }
+
     }, [squares])
+
+    const restartState = () => {
+      setSquare(Array(9).fill(null))
+      setPlayerXisNext(true)
+    }
 
     const updateSquares = (data) => {
       setSquare([...data.squares]);
