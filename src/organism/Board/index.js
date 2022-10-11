@@ -5,8 +5,7 @@ import { calculateWinner } from './../../utils';
 export default function Board ({ 
   squares, 
   playerXisNext, 
-  onUpdateSquare,
-  onUpdateScore
+  onUpdateSquare
 }) {
   const handleSqureClick = (i) => {
     const squaresData = squares.slice();
@@ -25,11 +24,6 @@ export default function Board ({
         onClick={() => handleSqureClick(i)}
       />
     )
-  }
-
-  const winner = calculateWinner(squares);
-  if(winner){
-    // onUpdateScore(winner);
   }
 
   return (

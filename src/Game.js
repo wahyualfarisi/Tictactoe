@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Score from './atoms/Score';
 import Board from './organism/Board';
+import { calculateWinner } from './utils';
 
 export default function Game() {
 
@@ -8,12 +9,23 @@ export default function Game() {
     const [playerXisNext, setPlayerXisNext] = useState(true);
     const [scores, setScores] = useState({ X: 0, O: 0, tie: 0 })
 
+    useEffect(() => {
+      const winner = calculateWinner(squares)
+
+      if(winner){
+        setScores((prevState) => ({
+          ...prevState,
+          [winner]: prevState[winner] + 1
+        }))
+        setSquare(Array(9).fill(null))
+        setPlayerXisNext(true)
+      }
+    }, [squares])
+
     const updateSquares = (data) => {
       setSquare([...data.squares]);
       setPlayerXisNext(data.xIsNext)
     }
-
-    const updateScores = (winner) => {}
 
     return (
       <div className='game'>
@@ -22,7 +34,6 @@ export default function Game() {
             squares={squares}
             playerXisNext={playerXisNext}
             onUpdateSquare={(data) => updateSquares(data)}
-            onUpdateScore={(winner) => updateScores(winner)}
           />
         </div>
 
