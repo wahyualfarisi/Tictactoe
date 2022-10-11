@@ -1,14 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.container-app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .board-row:after {
   clear: both;
   content: "";
@@ -41,10 +30,6 @@
 .square-value {
   font-size: 200px;
   color: #fff;
-}
-
-.kbd-navigation .square:focus {
-  background: #ddd;
 }
 
 .game {
